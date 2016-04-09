@@ -8,6 +8,7 @@ clear projections
 
 cd ~/aspire
 initpath
+cd ~/cwf_denoise/
 
 hatI=cfft2(g_projections);
 hatI_curr=hatI(:,:,1:N_images);
@@ -21,13 +22,6 @@ def2=4;
 lambda = EWavelength(300);
 B=10; % decay envelope parameter
 
-addpath ~/aspire/io/
-addpath ~/aspire/io/log/
-addpath ~/aspire/common/
-addpath ~/aspire/projections/simulation
-addpath ~/aspire/projections/
-addpath ~/aspire/projections/class_average/preprocess/
-addpath ~/aspire/projections/epsd/  
 
 %% Add CTF and/or envelope
 use_CTF=1;

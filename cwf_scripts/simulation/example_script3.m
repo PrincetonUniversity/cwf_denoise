@@ -1,14 +1,9 @@
 % Generate projections from IP3 molecule, add colored noise and CTF and
 % denoise them with CTF after prewhitening.
 
-addpath ~/aspire/io/
-addpath ~/aspire/io/log/
-addpath ~/aspire/common/
-addpath ~/aspire/projections/simulation
-addpath ~/aspire/projections/
-addpath ~/aspire/projections/class_average/preprocess/
-addpath ~/aspire/projections/epsd/
-addpath ~/aspire/extern/aLibs/EMIO/
+cd ~/aspire
+initpath
+cd ~/cwf_denoise
 
 n=105;
 K=100;
