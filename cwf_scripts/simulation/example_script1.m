@@ -1,7 +1,7 @@
 % Denoise projections of 80s ribosome (with white noise and CTF added).
 load /scratch/tbhamre/emd_6454_proj.mat
 
-N_images=1000;
+N_images=10000;
 g_projections=projections(:,:,1:N_images);
 g_projections=mask_corners(g_projections);
 clear projections
@@ -63,7 +63,13 @@ for count=1:numel(SNR)
     %% CTF in new basis: numerical integration
 
     [ctf_rad_all]=  calc_CTF_rad(use_CTF, L0, index, ndef, def1,def2,B, lambda, sample_points.r*((floor(L0/2)+1)/0.5));
-    [ denoised_coeff_ccwf] = jobscript_CCWF_cgshrink_test(index, ctf_rad_all, basis, sample_points,  coeff_mean, coeff_ymu, noise_v_r);
+    [ denoised_coeff_ccwf, skip_flags] = jobscript_CCWF_cgshrink_test(index, ctf_rad_all, basis, sample_points,  coeff_mean, coeff_ymu, noise_v_r);
+
+    energy_coeff=cumsum(cellfun(@norm,denoised_coeff_ccwf));
+    cutoff_coeff=find(energy_coeff/max(energy_coeff)>0.99,1,'first');
+    compressed_den_coeff=denoised_coeff_ccwf(1:cutoff_coeff);
+    sprintf('Total number of coeffs per image after compression is %d' ,sum(cellfun(@numel,compressed_den_coeff))/N_images)
+
 
     [recon] = recon_images_FB(c, R, L0, denoised_coeff_ccwf, 1, 10); % Specify range of images to reconstruct
     [mse_ccwf] = calc_MSE_v6(recon,  g_projections(:,:,1:n_im),R)

@@ -1,5 +1,4 @@
-function [X, relres, iter, num_eig]=solve_cg_shrink(A,C,w, noise_variance, nim, freq, regu)
-
+function [X, relres, iter, num_eig, skip_flag]=solve_cg_shrink(A,C,w, noise_variance, nim, freq, regu)
 % solve problem  \argmin_{X} \sum_i w(i) \|A{i} *X*A{i}'-C{i}\|_F^2 such that X is real
 D=size(A{1});
 E=zeros(D(2),D(2));
@@ -45,11 +44,12 @@ end
 
 %[ev,evals]=eig(C_tot/nim);
 %[p,fre]= check_MP(diag(evals), freq, noise_variance, nim, 20);
+skip_flag=0;
 
 if norm(E,'fro')<1e-6
     sprintf('Skipping CG tol 1e-6 for k=%d',freq)
     X=zeros(size(E));
-    relres=1; iter=0; num_eig=0;
+    relres=1; iter=0; num_eig=0; skip_flag=1;
     return;
 end
 
