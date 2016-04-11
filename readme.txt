@@ -7,6 +7,8 @@ http://arxiv.org/abs/1602.06632
 Zhizhen Zhao, Yoel Shkolnisky, Amit Singer
 http://arxiv.org/abs/1412.0781
 
+The folder kn_rankest includes code for rank estimation by S. Kritchman and B. Nadler.
+
 This package should be used in conjunction with the cryo-EM tool box ASPIRE (http://spr.math.princeton.edu/) and will be included in the latest version of ASPIRE.
 
 INSTRUCTIONS
