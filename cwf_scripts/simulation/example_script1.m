@@ -1,14 +1,18 @@
 % Denoise projections of 80s ribosome (with white noise and CTF added).
-load /scratch/tbhamre/emd_6454_proj.mat
 
-N_images=10000;
+n=105;
+K=100;
+[projections] = emd5278_proj_full(n,K); % IP3 dataset EMD5278.mat
+
+cd ~/aspire
+initpath
+cd ~/cwf_denoise
+
+N_images=K;
 g_projections=projections(:,:,1:N_images);
 g_projections=mask_corners(g_projections);
 clear projections
 
-cd ~/aspire
-initpath
-cd ~/cwf_denoise/
 
 hatI=cfft2(g_projections);
 hatI_curr=hatI(:,:,1:N_images);
