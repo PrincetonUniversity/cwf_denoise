@@ -1,2 +1,0 @@
-# cwf_denoise
-
