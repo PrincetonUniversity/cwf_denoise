@@ -1,4 +1,4 @@
-function [ denoised_coeff, skip_flags]  = jobscript_CCWF_cgshrink_test(index, CTF_rad_all, basis, sample_points,  mean_coeff, coeff_pos_k,  noise_v)
+function [ denoised_coeff, cov, eigims]  = jobscript_CCWF_cgshrink_cl(index, CTF_rad_all, basis, sample_points,  mean_coeff, coeff_pos_k,  noise_v)
 
 nim=length(index);
 ang_freqs=basis.ang_freqs;
@@ -53,8 +53,8 @@ for k=unique(ang_freqs)'
         [U,S]=eig(C);
         C=U*diag(max(diag(S),0))*U';
 	skip_flags(k+1)=skip_flag;
-	%cov{k+1}=C;
-        %eigims{k+1}=U;        
+	cov{k+1}=C;
+        eigims{k+1}=U;        
         %err_cov(k+1)=norm(C-tr_cov_k,'fro').^2/norm(tr_cov_k,'fro').^2;
         %err_tot=err_tot+norm(C-tr_cov_k,'fro').^2;
         %ctr_tot=ctr_tot+norm(tr_cov_k,'fro').^2;
