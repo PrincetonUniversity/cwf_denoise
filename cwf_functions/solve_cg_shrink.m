@@ -30,13 +30,15 @@ end
 [EE,ids]=sort(diag(EE),'descend');
 UU=UU(:,ids);
 
+if noise_variance~=0
 [k_hat, nnv]=KN_rankEst(EE,nim,1,0.1,size(EE,1));
 top_kn=zeros(size(EE));
 top_kn(1:k_hat)=ones(size(top_kn(1:k_hat)));
 EE=EE.*top_kn;
+disp('Clean case')
+end
 
 num_eig=sum(op_shrink(diag(EE), noise_variance, gamma)~=0);
-%num_eig=0;
 
 if noise_variance~=0
     E= UU*diag(op_shrink(diag(EE), noise_variance, gamma))*UU';
@@ -46,12 +48,19 @@ end
 %[p,fre]= check_MP(diag(evals), freq, noise_variance, nim, 20);
 skip_flag=0;
 
-if norm(E,'fro')<1e-6
-    sprintf('Skipping CG tol 1e-6 for k=%d',freq)
+if norm(E,'fro')<1e-15
+    sprintf('Skipping CG tol 1e-15 for k=%d',freq)
     X=zeros(size(E));
     relres=1; iter=0; num_eig=0; skip_flag=1;
     return;
 end
+
+%if freq>42
+%    sprintf('Skipping CG for hardcoded k=%d',freq)
+%    X=zeros(size(E));
+%    relres=1; iter=0; num_eig=0; skip_flag=1;
+%    return;
+%end
 
 if freq==0
     reg_flag=1;
@@ -84,7 +93,7 @@ end
         
         lhs=reshape(lhs,D1^2,1);
         if reg_flag==1
-            lhs=lhs+regu*reshape(inv_sqrt_Epop_*x*inv_sqrt_Epop_,D1^2,1);
+            lhs=lhs+regu*reshape(inv_sqrt_Epop_*x*inv_sqrt_Epop_,D1^2,1); % There's a diff in this line in deb fn. But regu 0 set here so didn't matter. Correct it for deb
         end
         
         lhs=reshape(lhs,D1,D1);
@@ -93,8 +102,8 @@ end
         
     end
 
-tol = 1e-5;
-maxit = 1000;
+tol = 1e-15;
+maxit = 20000;
 [X,flag2,relres, iter] = pcg(@applyop,reshape(real(C),D1^2,1),tol,maxit);
 flag2, iter
 X=reshape(X,D2,D2);

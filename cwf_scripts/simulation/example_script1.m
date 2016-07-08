@@ -2,7 +2,7 @@
 load /scratch/tbhamre/emd_6454_proj.mat
 
 %n=105;
-K=10000;
+K=1000;
 %[projections] = emd5278_proj_full(n,K); % IP3 dataset EMD5278.mat
 
 cd ~/aspire
@@ -46,7 +46,6 @@ for count=1:numel(SNR)
     energy_thresh=0.99;
     [ c, R ] = choose_support_v6( proj_CTF_noisy, energy_thresh); %Estimate band limit and compact support size
     c=c*(0.5/floor(size(g_proj_CTF,1)/2)); % Rescaling between 0 and 0.5
-    c=0.3    
 
     clear  hatI 
     n_r = ceil(4*c*R);

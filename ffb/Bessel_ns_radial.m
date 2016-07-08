@@ -6,7 +6,7 @@ function [ basis ]=Bessel_ns_radial( c, R, r )
 % Input:  
 %       1. c: band limit
 %       2. R: compact support radius in real domain
-%	    3. r: poistions on [0, 1]
+%	    3. r: poistions on [0, c]
 % Output: 
 %       1. basis.Phi_ns: Bessel radial functions in cell structure
 %       2. basis.ang_freqs: angular frequencies
