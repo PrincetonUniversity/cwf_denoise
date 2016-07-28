@@ -28,30 +28,63 @@
 
     <div class="container">
       <section id="main_content">
-        <h3>
-<a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+        <p>This is a MATLAB package for denoising CTF -affected cryo-EM images based on the following manuscripts:
+1) Denoising and Covariance Estimation of Single Particle Cryo-EM Images
+Tejal Bhamre, Teng Zhang, Amit Singer
+<a href="http://arxiv.org/abs/1602.06632">http://arxiv.org/abs/1602.06632</a></p>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here <a href="https://guides.github.com/features/mastering-markdown/">using GitHub Flavored Markdown</a>, select a template crafted by a designer, and publish. After your page is generated, you can check out the new <code>gh-pages</code> branch locally. If you’re using GitHub Desktop, simply sync your repository and you’ll see the new branch.</p>
+<p>2) Fast Steerable Principal Component Analysis
+Zhizhen Zhao, Yoel Shkolnisky, Amit Singer
+<a href="http://arxiv.org/abs/1412.0781">http://arxiv.org/abs/1412.0781</a></p>
 
-<h3>
-<a id="designer-templates" class="anchor" href="#designer-templates" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Designer Templates</h3>
+<p>The folder kn_rankest includes code for rank estimation by S. Kritchman and B. Nadler.</p>
 
-<p>We’ve crafted some handsome templates for you to use. Go ahead and click 'Continue to layouts' to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved.</p>
+<h2>
+<a id="dependencies" class="anchor" href="#dependencies" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>DEPENDENCIES</h2>
 
-<h3>
-<a id="creating-pages-manually" class="anchor" href="#creating-pages-manually" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Creating pages manually</h3>
+<p>This package should be used in conjunction with the cryo-EM tool box ASPIRE (<a href="http://spr.math.princeton.edu/">http://spr.math.princeton.edu/</a>) and will be included in the latest version of ASPIRE. It also requires the NUFFT package (to be included in the latest version of ASPIRE) available
+at <a href="http://www.cims.nyu.edu/cmcl/nufft/nufft.html">http://www.cims.nyu.edu/cmcl/nufft/nufft.html</a>.</p>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<h2>
+<a id="instructions" class="anchor" href="#instructions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>INSTRUCTIONS</h2>
+
+<p>1) Download and install ASPIRE from <a href="http://spr.math.princeton.edu/">http://spr.math.princeton.edu/</a> following the instructions for installation.
+2) Add ASPIRE files in your MATLAB path using initpath.m in ASPIRE.
+3) If this package is in a separate location than ASPIRE, add the package to your MATLAB path using cwf_paths.m<br>
+4) Enjoy the example simulation scripts in cwf_scripts to denoise images.</p>
+
+<h2>
+<a id="instructions-for-nufft" class="anchor" href="#instructions-for-nufft" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>INSTRUCTIONS FOR NUFFT</h2>
+
+<p><code>wget http://www.fftw.org/fftw-3.3.4.tar.gz</code>
+<code>tar -zxf fftw-3.3.4.tar.gz</code>
+<code>cd fftw-3.3.4</code>
+<code>./configure --prefix=$HOME/local --enable-openmp --enable-shared</code>
+<code>make</code>
+<code>make install</code></p>
+
+<p>Then we do the same thing for NFFT:</p>
+
+<p><code>wget https://www-user.tu-chemnitz.de/~potts/nfft/download/nfft-3.2.3.tar.gz</code>
+<code>tar -zxf nfft-3.2.3.tar.gz</code>
+<code>cd nfft-3.2.3</code>
+<code>./configure --prefix=$HOME/local --enable-openmp --with-matlab=/usr/local/Matlab/R2013a --with-fftw3=$HOME/local</code>
+<code>make</code>
+<code>make install</code></p>
+
+<p>To run everything in MATLAB, we type</p>
+
+<p><code>addpath([getenv('HOME') '/local/share/nfft/matlab/nfft']);</code>
+<code>addpath([getenv('HOME') '/local/lib']);</code></p>
+
+<p>and check by running</p>
+
+<p><code>simple_test;</code></p>
 
 <h3>
 <a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Authors and Contributors</h3>
 
-<p>You can <a href="https://help.github.com/articles/basic-writing-and-formatting-syntax/#mentioning-users-and-teams" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor’s GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>
-<a id="support-or-contact" class="anchor" href="#support-or-contact" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out our <a href="https://help.github.com/pages">documentation</a> or <a href="https://github.com/contact">contact support</a> and we’ll help you sort it out.</p>
+<p>In case of issues or questions, please email Tejal (<a href="mailto:tbhamre@princeton.edu">tbhamre@princeton.edu</a>) and Jane (<a href="mailto:jzhao@cims.nyu.edu">jzhao@cims.nyu.edu</a>).</p>
       </section>
     </div>
 
