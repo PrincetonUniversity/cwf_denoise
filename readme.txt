@@ -23,32 +23,4 @@ INSTRUCTIONS
 3) If this package is in a separate location than ASPIRE, add the package to your MATLAB path using cwf_paths.m  
 4) Enjoy the example simulation scripts in cwf_scripts to denoise images.
 
-INSTRUCTIONS FOR NUFFT
----------------------------
-
-wget http://www.fftw.org/fftw-3.3.4.tar.gz
-tar -zxf fftw-3.3.4.tar.gz
-cd fftw-3.3.4
-./configure --prefix=$HOME/local --enable-openmp --enable-shared
-make
-make install
-
-Then we do the same thing for NFFT:
-
-wget https://www-user.tu-chemnitz.de/~potts/nfft/download/nfft-3.2.3.tar.gz
-tar -zxf nfft-3.2.3.tar.gz
-cd nfft-3.2.3
-./configure --prefix=$HOME/local --enable-openmp --with-matlab=/usr/local/Matlab/R2013a --with-fftw3=$HOME/local
-make
-make install
-
-To run everything in MATLAB, we type
-
-addpath([getenv('HOME') '/local/share/nfft/matlab/nfft']);
-addpath([getenv('HOME') '/local/lib']);
-
-and check by running
-
-simple_test;
-
 In case of issues or questions, please email Tejal (tbhamre@princeton.edu) and Jane (jzhao@cims.nyu.edu).
