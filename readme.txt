@@ -23,4 +23,4 @@ INSTRUCTIONS
 3) If this package is in a separate location than ASPIRE, add the package to your MATLAB path using cwf_paths.m  
 4) Enjoy the example simulation scripts in cwf_scripts to denoise images.
 
-In case of issues or questions, please email Tejal (tbhamre@princeton.edu) and Jane (jzhao@cims.nyu.edu).
+In case of issues or questions, please email Tejal (tbhamre@math.princeton.edu) and Jane (jzhao@cims.nyu.edu).
